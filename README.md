@@ -1,29 +1,32 @@
-# Puppet installation steps
+### Steps to remove old puppet installs
+    dpkg -l | grep puppetdpkg -l | grep puppet
+    rm -rf puppetlabs
+    rm -rf /etc/puppetlabs/puppet/ssl
 
--- Steps to remove old puppet installs
-dpkg -l | grep puppet
-rm -rf puppetlabs
-rm -rf /etc/puppetlabs/puppet/ssl
+### Steps to install puppetserver (Leader/Master node)
 
 
--- Steps to install puppetserver (Leader/Master node)
-dpkg -i puppet6-release-bionic.deb
-apt-get update
-puppetserver ca setup
-systemctl start puppetserver
-Add entry in /ect/hosts file for the puppet node
-<ip address of the master node> <name of the host> puppet
+    dpkg -i puppet6-release-bionic.deb
+    apt-get update
+    puppetserver ca setup
+    systemctl start puppetserver
+    ####Add entry in /ect/hosts file for the puppet node
+`<ip address of the master node> <name of the host> puppet`
 
--- Steps to install puppet agent 
-dpkg -i puppet6-release-bionic.deb
-apt-get update
-apt-get install puppet-agent
-Add entry in /ect/hosts file for the puppet node
-<ip address of the master node> <name of the host> puppet
+### Steps to install puppet agent
 
---- Remove old certs from the agent
-rm -rf /etc/puppetlabs/puppet/ssl/
--- Run from each agent to request for cert sign to puppet server
+
+    dpkg -i puppet6-release-bionic.deb
+    apt-get update
+    apt-get install puppet-agent
+####Add entry in /ect/hosts file for the puppet node
+`<ip address of the master node> <name of the host> puppet
+
+### Remove old certs from the agent
+
+
+    rm -rf /etc/puppetlabs/puppet/ssl/
+### Run from each agent to request for cert sign to puppet server
 puppet agent -t
 
 -- Once all or any of the agent requested for cert sign, run following on the puppet server
