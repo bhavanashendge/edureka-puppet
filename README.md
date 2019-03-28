@@ -1,4 +1,4 @@
-# puppet
+# Puppet installation steps
 
 -- Steps to remove old puppet installs
 dpkg -l | grep puppet
